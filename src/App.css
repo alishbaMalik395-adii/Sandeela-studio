@@ -1,0 +1,295 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Raleway:wght@300;400;500;600&family=Cormorant+Garamond:wght@300;400;600&display=swap');
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --gold: #C9A84C;
+  --gold-light: #E8C96B;
+  --gold-dim: #8B6914;
+  --black: #080808;
+  --black2: #111111;
+  --black3: #1a1a1a;
+  --white: #F5F0E8;
+  --gray: #888;
+  --gray2: #555;
+  --font-display: 'Playfair Display', serif;
+  --font-body: 'Raleway', sans-serif;
+  --font-accent: 'Cormorant Garamond', serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+}
+
+/* ============================================
+   GLOBAL BACKGROUND ANIMATION CANVAS
+   Yeh poori website ke peeche chalti rahegi
+   ============================================ */
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 60% 50% at 20% 20%, rgba(201,168,76,0.09) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 60% at 80% 80%, rgba(201,168,76,0.07) 0%, transparent 55%),
+    radial-gradient(ellipse 40% 40% at 50% 50%, rgba(201,168,76,0.05) 0%, transparent 70%),
+    radial-gradient(ellipse 30% 30% at 55% 35%, rgba(201,168,76,0.06) 0%, transparent 58%);
+  backdrop-filter: blur(8px);
+  animation: bg-orb-drift 18s ease-in-out infinite alternate;
+}
+
+@keyframes bg-orb-drift {
+  0%   { background-position: 0% 0%, 100% 100%, 50% 50%; opacity: 1; }
+  33%  {
+    background:
+      radial-gradient(ellipse 70% 55% at 70% 10%, rgba(201,168,76,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 45% 65% at 10% 70%, rgba(201,168,76,0.06) 0%, transparent 55%),
+      radial-gradient(ellipse 50% 35% at 90% 40%, rgba(201,168,76,0.04) 0%, transparent 70%);
+  }
+  66%  {
+    background:
+      radial-gradient(ellipse 55% 70% at 40% 90%, rgba(201,168,76,0.07) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 90% 20%, rgba(201,168,76,0.05) 0%, transparent 55%),
+      radial-gradient(ellipse 35% 50% at 20% 50%, rgba(201,168,76,0.04) 0%, transparent 70%);
+  }
+  100% {
+    background:
+      radial-gradient(ellipse 65% 45% at 60% 60%, rgba(201,168,76,0.09) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 60% at 30% 10%, rgba(201,168,76,0.05) 0%, transparent 55%),
+      radial-gradient(ellipse 55% 45% at 70% 80%, rgba(201,168,76,0.04) 0%, transparent 70%);
+  }
+}
+
+/* Animated gold grid mesh */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(201,168,76,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201,168,76,0.035) 1px, transparent 1px);
+  background-size: 80px 80px;
+  animation: grid-shift 25s linear infinite;
+  mask-image: radial-gradient(ellipse 90% 90% at 50% 50%, black 0%, transparent 100%);
+}
+
+@keyframes grid-shift {
+  0%   { transform: translate(0, 0); }
+  100% { transform: translate(80px, 80px); }
+}
+
+.site-bg-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 18% 22%, rgba(201,168,76,0.12) 0%, transparent 22%),
+    radial-gradient(circle at 80% 18%, rgba(201,168,76,0.08) 0%, transparent 18%),
+    radial-gradient(circle at 50% 75%, rgba(201,168,76,0.05) 0%, transparent 25%),
+    radial-gradient(circle at 30% 50%, rgba(255,255,255,0.04) 0%, transparent 12%);
+  background-repeat: no-repeat;
+  animation: site-bg-drift 24s ease-in-out infinite alternate,
+             site-bg-pulse 8s ease-in-out infinite alternate;
+}
+
+@keyframes site-bg-drift {
+  0% {
+    background-position: 18% 22%, 80% 18%, 50% 75%, 30% 50%;
+  }
+  100% {
+    background-position: 22% 18%, 78% 22%, 52% 70%, 34% 48%;
+  }
+}
+
+@keyframes site-bg-pulse {
+  0%   { opacity: 0.75; }
+  100% { opacity: 1; }
+}
+
+/* Light streak — diagonal sweep */
+.app::before {
+  content: '';
+  position: fixed;
+  top: -50%;
+  left: -20%;
+  width: 2px;
+  height: 200vh;
+  background: linear-gradient(to bottom, transparent 0%, rgba(201,168,76,0.18) 40%, rgba(201,168,76,0.35) 50%, rgba(201,168,76,0.18) 60%, transparent 100%);
+  transform: rotate(25deg);
+  animation: light-sweep 9s ease-in-out infinite;
+  z-index: 0;
+  pointer-events: none;
+}
+
+@keyframes light-sweep {
+  0%   { left: -20%; opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { left: 120%; opacity: 0; }
+}
+
+/* Second sweep — slower, opposite angle */
+.app::after {
+  content: '';
+  position: fixed;
+  top: -50%;
+  right: -20%;
+  width: 1px;
+  height: 200vh;
+  background: linear-gradient(to bottom, transparent 0%, rgba(201,168,76,0.1) 45%, rgba(201,168,76,0.2) 50%, rgba(201,168,76,0.1) 55%, transparent 100%);
+  transform: rotate(-20deg);
+  animation: light-sweep-reverse 13s ease-in-out 4s infinite;
+  z-index: 0;
+  pointer-events: none;
+}
+
+@keyframes light-sweep-reverse {
+  0%   { right: -20%; opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { right: 120%; opacity: 0; }
+}
+
+/* Floating dust motes */
+@keyframes dust-float {
+  0%   { transform: translateY(100vh) translateX(0px) scale(0); opacity: 0; }
+  5%   { opacity: 1; transform: translateY(90vh) scale(1); }
+  50%  { transform: translateY(40vh) translateX(30px) scale(0.8); opacity: 0.6; }
+  95%  { opacity: 0.3; }
+  100% { transform: translateY(-10vh) translateX(-20px) scale(0.3); opacity: 0; }
+}
+
+.dust-mote {
+  position: fixed;
+  width: 2px;
+  height: 2px;
+  background: var(--gold);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  animation: dust-float linear infinite;
+  box-shadow: 0 0 4px rgba(201,168,76,0.8);
+}
+
+/* Corner decorative rings */
+.corner-ring {
+  position: fixed;
+  border-radius: 50%;
+  border: 1px solid rgba(201,168,76,0.06);
+  pointer-events: none;
+  z-index: 0;
+  animation: ring-breathe 8s ease-in-out infinite;
+}
+.corner-ring:nth-child(1) { width: 600px; height: 600px; top: -300px; right: -300px; animation-delay: 0s; }
+.corner-ring:nth-child(2) { width: 400px; height: 400px; top: -200px; right: -200px; animation-delay: 1s; border-color: rgba(201,168,76,0.04); }
+.corner-ring:nth-child(3) { width: 600px; height: 600px; bottom: -300px; left: -300px; animation-delay: 2s; }
+.corner-ring:nth-child(4) { width: 350px; height: 350px; bottom: -175px; left: -175px; animation-delay: 3s; border-color: rgba(201,168,76,0.04); }
+
+@keyframes ring-breathe {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%       { transform: scale(1.05); opacity: 0.5; }
+}
+
+/* Shimmer wave — horizontal */
+.shimmer-wave {
+  position: fixed;
+  left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(201,168,76,0.3) 30%, rgba(201,168,76,0.6) 50%, rgba(201,168,76,0.3) 70%, transparent 100%);
+  pointer-events: none;
+  z-index: 0;
+  animation: wave-travel 7s ease-in-out infinite;
+  opacity: 0;
+}
+.shimmer-wave:nth-child(1) { animation-delay: 0s; }
+.shimmer-wave:nth-child(2) { animation-delay: 3.5s; }
+
+@keyframes wave-travel {
+  0%   { top: -2px; opacity: 0; }
+  5%   { opacity: 1; }
+  95%  { opacity: 0.4; }
+  100% { top: 100vh; opacity: 0; }
+}
+
+/* ============================================
+   Make sure all sections sit above bg
+   ============================================ */
+.app {
+  position: relative;
+  z-index: 1;
+}
+
+.app > * { position: relative; z-index: 1; }
+
+.app-hidden { opacity: 0; }
+.app-visible { opacity: 1; transition: opacity 0.6s ease; }
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--black); }
+::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
+
+.section-label {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1rem;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--white);
+}
+
+.gold-line {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+  margin: 1.5rem 0;
+}
+
+.gold-btn {
+  display: inline-block;
+  padding: 14px 36px;
+  background: transparent;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  transition: color 0.4s ease;
+}
+.gold-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gold);
+  transform: translateX(-100%);
+  transition: transform 0.4s ease;
+  z-index: 0;
+}
+.gold-btn:hover::before { transform: translateX(0); }
+.gold-btn:hover { color: var(--black); }
+.gold-btn span { position: relative; z-index: 1; }

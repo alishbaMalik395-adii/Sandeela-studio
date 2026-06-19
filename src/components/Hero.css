@@ -1,0 +1,748 @@
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  padding: 0 5%;
+  gap: 4rem;
+}
+
+/* ============================================
+   HERO BACKGROUND LAYERS
+   ============================================ */
+
+/* Deep radial glow behind everything */
+.hero-bg-pattern {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 60%, rgba(201, 168, 76, 0.09) 0%, transparent 65%) 65% 50%,
+    radial-gradient(ellipse 40% 50%, rgba(201, 168, 76, 0.06) 0%, transparent 55%) 10% 80%,
+    radial-gradient(ellipse 30% 30%, rgba(201, 168, 76, 0.05) 0%, transparent 60%) 80% 10%;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  animation:
+    hero-glow-pulse 6s ease-in-out infinite alternate,
+    hero-bg-drift 20s ease-in-out infinite alternate;
+}
+
+@keyframes hero-glow-pulse {
+  0% {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1.04);
+  }
+}
+
+@keyframes hero-bg-drift {
+  0% {
+    background-position: 60% 45%, 15% 82%, 85% 15%;
+  }
+
+  100% {
+    background-position: 70% 50%, 5% 78%, 75% 5%;
+  }
+}
+
+/* ============================================
+   PARTICLES — more, varied sizes & speeds
+   ============================================ */
+.hero-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.particle {
+  position: absolute;
+  background: var(--gold);
+  border-radius: 50%;
+  opacity: 0;
+  animation: float-particle linear infinite;
+  box-shadow: 0 0 6px rgba(201, 168, 76, 0.9), 0 0 12px rgba(201, 168, 76, 0.4);
+}
+
+@keyframes float-particle {
+  0% {
+    opacity: 0;
+    transform: translateY(100vh) scale(0.5);
+  }
+
+  8% {
+    opacity: 0.8;
+  }
+
+  50% {
+    opacity: 0.5;
+    transform: translateY(40vh) translateX(20px) scale(1);
+  }
+
+  92% {
+    opacity: 0.3;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-5vh) translateX(-10px) scale(0.3);
+  }
+}
+
+/* ============================================
+   ROTATING RINGS — always spinning in hero
+   ============================================ */
+.hero-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(201, 168, 76, 0.08);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero-ring-1 {
+  width: 700px;
+  height: 700px;
+  top: 50%;
+  left: 55%;
+  transform: translate(-50%, -50%);
+  animation: ring-spin-cw 40s linear infinite;
+  border-color: rgba(201, 168, 76, 0.06);
+}
+
+.hero-ring-2 {
+  width: 500px;
+  height: 500px;
+  top: 50%;
+  left: 55%;
+  transform: translate(-50%, -50%);
+  animation: ring-spin-ccw 28s linear infinite;
+  border-color: rgba(201, 168, 76, 0.1);
+  border-style: dashed;
+}
+
+.hero-ring-3 {
+  width: 320px;
+  height: 320px;
+  top: 50%;
+  left: 55%;
+  transform: translate(-50%, -50%);
+  animation: ring-spin-cw 18s linear infinite;
+  border-color: rgba(201, 168, 76, 0.08);
+}
+
+@keyframes ring-spin-cw {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@keyframes ring-spin-ccw {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  to {
+    transform: translate(-50%, -50%) rotate(-360deg);
+  }
+}
+
+/* Ticker dots on rings */
+.hero-ring-1::before,
+.hero-ring-1::after,
+.hero-ring-2::before,
+.hero-ring-2::after {
+  content: '';
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: var(--gold);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--gold), 0 0 16px rgba(201, 168, 76, 0.5);
+}
+
+.hero-ring-1::before {
+  top: -2.5px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.hero-ring-1::after {
+  bottom: -2.5px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.hero-ring-2::before {
+  top: 50%;
+  right: -2.5px;
+  transform: translateY(-50%);
+}
+
+.hero-ring-2::after {
+  top: 50%;
+  left: -2.5px;
+  transform: translateY(-50%);
+}
+
+/* ============================================
+   SHOOTING STARS
+   ============================================ */
+.shooting-star {
+  position: absolute;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(201, 168, 76, 0.9), transparent);
+  pointer-events: none;
+  z-index: 1;
+  animation: shoot linear infinite;
+  opacity: 0;
+}
+
+@keyframes shoot {
+  0% {
+    transform: translateX(-200px) translateY(0) rotate(-20deg);
+    opacity: 0;
+    width: 0px;
+  }
+
+  5% {
+    opacity: 1;
+    width: 80px;
+  }
+
+  80% {
+    opacity: 0.6;
+  }
+
+  100% {
+    transform: translateX(110vw) translateY(100px) rotate(-20deg);
+    opacity: 0;
+    width: 120px;
+  }
+}
+
+/* ============================================
+   HERO CONTENT
+   ============================================ */
+.hero-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  padding-top: 80px;
+  z-index: 2;
+}
+
+.hero-content {
+  transition: opacity 0.5s, transform 0.5s;
+}
+
+.hero-exit {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+.hero-enter {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero-tag {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--gold);
+  padding: 6px 14px;
+  border: 1px solid rgba(201, 168, 76, 0.3);
+  margin-bottom: 1.5rem;
+  animation: fade-in-up 0.6s ease both;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Shimmer on tag */
+.hero-tag::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(201, 168, 76, 0.2), transparent);
+  animation: tag-shimmer 3s ease 1s infinite;
+}
+
+@keyframes tag-shimmer {
+  0% {
+    left: -100%;
+  }
+
+  100% {
+    left: 200%;
+  }
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  font-weight: 900;
+  line-height: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1em;
+  margin-bottom: 1.5rem;
+}
+
+.hero-line {
+  display: block;
+  color: var(--white);
+  opacity: 0;
+  transform: translateX(-30px);
+  animation: line-in 0.6s ease forwards;
+}
+
+.hero-line em {
+  font-style: italic;
+  color: var(--gold);
+  -webkit-text-stroke: 1px var(--gold);
+  /* Gold text glow */
+  text-shadow: 0 0 30px rgba(201, 168, 76, 0.4), 0 0 60px rgba(201, 168, 76, 0.15);
+  animation: title-glow 4s ease-in-out infinite alternate;
+}
+
+@keyframes title-glow {
+  from {
+    text-shadow: 0 0 20px rgba(201, 168, 76, 0.3), 0 0 40px rgba(201, 168, 76, 0.1);
+  }
+
+  to {
+    text-shadow: 0 0 40px rgba(201, 168, 76, 0.7), 0 0 80px rgba(201, 168, 76, 0.3);
+  }
+}
+
+@keyframes line-in {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.hero-sub {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: rgba(245, 240, 232, 0.6);
+  line-height: 1.8;
+  max-width: 400px;
+  margin-bottom: 2.5rem;
+  animation: fade-in-up 0.8s ease 0.4s both;
+}
+
+.hero-btns {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  animation: fade-in-up 0.8s ease 0.6s both;
+}
+
+.hero-btn-main {
+  font-size: 0.7rem;
+}
+
+.hero-btn-ghost {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: rgba(245, 240, 232, 0.6);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(245, 240, 232, 0.2);
+  padding-bottom: 2px;
+  transition: color 0.3s, border-color 0.3s;
+}
+
+.hero-btn-ghost:hover {
+  color: var(--gold);
+  border-color: var(--gold);
+}
+
+.hero-stats {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  animation: fade-in-up 0.8s ease 0.8s both;
+}
+
+.hero-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stat-num {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1;
+  text-shadow: 0 0 20px rgba(201, 168, 76, 0.4);
+}
+
+.stat-label {
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(245, 240, 232, 0.45);
+}
+
+.hero-stat-div {
+  width: 1px;
+  height: 40px;
+  background: rgba(201, 168, 76, 0.2);
+}
+
+/* ============================================
+   HERO RIGHT — IMAGE FRAME
+   ============================================ */
+.hero-right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 80px;
+  z-index: 2;
+}
+
+.hero-img-frame {
+  position: relative;
+  width: min(420px, 90vw);
+  aspect-ratio: 3/4;
+  animation: frame-in 1s ease 0.3s both;
+}
+
+@keyframes frame-in {
+  from {
+    opacity: 0;
+    transform: scale(0.92) translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Animated corner brackets */
+.frame-corner {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  z-index: 2;
+}
+
+.frame-corner.tl {
+  top: -4px;
+  left: -4px;
+  border-top: 2px solid var(--gold);
+  border-left: 2px solid var(--gold);
+  animation: corner-glow 3s ease-in-out infinite;
+}
+
+.frame-corner.tr {
+  top: -4px;
+  right: -4px;
+  border-top: 2px solid var(--gold);
+  border-right: 2px solid var(--gold);
+  animation: corner-glow 3s ease-in-out 0.75s infinite;
+}
+
+.frame-corner.bl {
+  bottom: -4px;
+  left: -4px;
+  border-bottom: 2px solid var(--gold);
+  border-left: 2px solid var(--gold);
+  animation: corner-glow 3s ease-in-out 1.5s infinite;
+}
+
+.frame-corner.br {
+  bottom: -4px;
+  right: -4px;
+  border-bottom: 2px solid var(--gold);
+  border-right: 2px solid var(--gold);
+  animation: corner-glow 3s ease-in-out 2.25s infinite;
+}
+
+@keyframes corner-glow {
+
+  0%,
+  100% {
+    box-shadow: none;
+    border-color: rgba(201, 168, 76, 0.5);
+  }
+
+  50% {
+    box-shadow: 0 0 12px rgba(201, 168, 76, 0.8);
+    border-color: var(--gold);
+  }
+}
+
+/* Orbit dot around the frame */
+.frame-orbit {
+  position: absolute;
+  inset: -20px;
+  border-radius: 4px;
+  pointer-events: none;
+  animation: orbit-spin 8s linear infinite;
+}
+
+.frame-orbit::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  background: var(--gold);
+  border-radius: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 0 10px var(--gold), 0 0 20px rgba(201, 168, 76, 0.5);
+}
+
+@keyframes orbit-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.hero-img-placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #111 0%, #1a1a1a 50%, #0f0f0f 100%);
+  border: 1px solid rgba(201, 168, 76, 0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Inner shimmer on placeholder */
+.hero-img-placeholder::after {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(from 0deg at 50% 50%, transparent 0deg, rgba(201, 168, 76, 0.04) 60deg, transparent 120deg);
+  animation: placeholder-spin 12s linear infinite;
+}
+
+@keyframes placeholder-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.camera-icon svg {
+  width: 80px;
+  opacity: 0.7;
+  animation: cam-breathe 3s ease infinite;
+  z-index: 1;
+}
+
+@keyframes cam-breathe {
+
+  0%,
+  100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 0px rgba(201, 168, 76, 0));
+  }
+
+  50% {
+    transform: scale(1.07);
+    filter: drop-shadow(0 0 10px rgba(201, 168, 76, 0.6));
+  }
+}
+
+.img-placeholder-text {
+  font-size: 0.8rem;
+  color: rgba(201, 168, 76, 0.5);
+  letter-spacing: 0.05em;
+  z-index: 1;
+}
+
+.img-placeholder-hint {
+  font-size: 0.6rem;
+  color: rgba(255, 255, 255, 0.2);
+  z-index: 1;
+}
+
+.hero-badge {
+  position: absolute;
+  bottom: 2rem;
+  left: -20rem;
+  background: rgba(8, 8, 8, 0.95);
+  border: 1px solid rgba(201, 168, 76, 0.4);
+  padding: 12px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  animation: badge-in 0.8s ease 1s both;
+  backdrop-filter: blur(8px);
+}
+
+@keyframes badge-in {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.badge-num {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  color: var(--gold);
+  font-weight: 700;
+  text-shadow: 0 0 16px rgba(201, 168, 76, 0.6);
+}
+
+.badge-label {
+  font-size: 0.55rem;
+  letter-spacing: 0.2em;
+  color: rgba(245, 240, 232, 0.5);
+  text-transform: uppercase;
+}
+
+/* ============================================
+   DOTS + SCROLL HINT
+   ============================================ */
+.hero-dots {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 3;
+}
+
+.dot {
+  width: 24px;
+  height: 2px;
+  background: rgba(201, 168, 76, 0.3);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+  border-radius: 1px;
+}
+
+.dot-active {
+  background: var(--gold);
+  width: 40px;
+  box-shadow: 0 0 8px rgba(201, 168, 76, 0.7);
+}
+
+.hero-scroll-hint {
+  position: absolute;
+  right: 3rem;
+  bottom: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.scroll-line {
+  width: 1px;
+  height: 50px;
+  background: linear-gradient(to bottom, transparent, var(--gold));
+  animation: scroll-line 1.5s ease infinite;
+  box-shadow: 0 0 4px rgba(201, 168, 76, 0.5);
+}
+
+@keyframes scroll-line {
+  0% {
+    transform: scaleY(0);
+    transform-origin: top;
+  }
+
+  50% {
+    transform: scaleY(1);
+    transform-origin: top;
+  }
+
+  51% {
+    transform-origin: bottom;
+  }
+
+  100% {
+    transform: scaleY(0);
+    transform-origin: bottom;
+  }
+}
+
+.hero-scroll-hint span {
+  font-size: 0.55rem;
+  letter-spacing: 0.3em;
+  color: rgba(201, 168, 76, 0.5);
+  text-transform: uppercase;
+  writing-mode: vertical-lr;
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 900px) {
+  .hero {
+    flex-direction: column;
+    padding-top: 100px;
+    padding-bottom: 4rem;
+  }
+
+  .hero-right {
+    display: none;
+  }
+
+  .hero-scroll-hint {
+    display: none;
+  }
+
+  .hero-ring-1,
+  .hero-ring-2,
+  .hero-ring-3 {
+    display: none;
+  }
+}
