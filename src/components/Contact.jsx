@@ -71,7 +71,7 @@ export default function Contact() {
               <div className="form-row">
                 <div className="form-group">
                   <label>Your Name</label>
-                  <input type="text" name="name" placeholder="Aap ka naam" value={form.name} onChange={handle} required />
+                  <input type="text" name="name" placeholder="Enter your name" value={form.name} onChange={handle} required />
                 </div>
                 <div className="form-group">
                   <label>Phone Number</label>
@@ -106,10 +106,10 @@ export default function Contact() {
           ) : (
             <div className="form-success">
               <div className="success-icon">✦</div>
-              <h3>Shukriya!</h3>
-              <p>Hamein aap ka message mil gaya. Hum aap se jald hi rabta karenge.</p>
+              <h3>Thank you!</h3>
+              <p>We have received your message. We will contact you very soon.</p>
               <a href="https://wa.me/923170707926" className="wa-btn" target="_blank" rel="noreferrer">
-                <span>💬</span><span>WhatsApp par message karein</span>
+                <span>💬</span><span>Message us on WhatsApp</span>
               </a>
             </div>
           )}

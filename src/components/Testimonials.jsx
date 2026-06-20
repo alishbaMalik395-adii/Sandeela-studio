@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 import "./Testimonials.css";
 
+
 const reviews = [
-  { name: "Ayesha Malik", role: "Bride", stars: 5, text: "Sheraz bhai ne humari shadi ki photography itni khoobsurti se ki — har tasveer ek yaad hai. Sandeela Studio is absolutely amazing!" },
+  { name: "Ayesha Malik", role: "Bride", stars: 5, text: "Sheraz captured our wedding photography so beautifully — every single photo is a precious memory. Sandeela Studio is absolutely amazing!" },
   { name: "Tariq Hussain", role: "Business Owner", stars: 5, text: "Our product photos turned out stunning. Sales increased 40% after using Sandeela Studio's commercial photography. Highly recommended!" },
   { name: "Sana Rehman", role: "Model", stars: 5, text: "Professional, creative, and patient. Sheraz knows exactly how to bring out the best in every shot. My portfolio looks incredible!" },
   { name: "Ahmad Raza", role: "Event Organizer", stars: 5, text: "We've worked with many photographers but Sandeela Studio is on another level. The team's attention to detail is unmatched in Islamabad." },
@@ -34,7 +35,7 @@ export default function Testimonials() {
         </div>
 
         <div className="tst-layout">
-          <div className="tst-main">
+          <div className="tst-main" key={current}>
             <div className="tst-quote-icon">"</div>
             <p className="tst-text">{reviews[current].text}</p>
             <div className="tst-stars">

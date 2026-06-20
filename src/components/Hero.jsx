@@ -24,6 +24,8 @@ export default function Hero() {
   const [current, setCurrent] = useState(0);
   const [animating, setAnimating] = useState(false);
   const [count, setCount] = useState(0);
+  const [videoError, setVideoError] = useState(false);
+  const videoRef = useRef(null);
 
   const goTo = (idx) => {
     if (animating) return;
@@ -46,6 +48,30 @@ export default function Hero() {
       else setCount(val);
     }, 16);
     return () => clearInterval(timer);
+  }, []);
+
+  // Force play on mobile — handle user interaction
+  useEffect(() => {
+    const vid = videoRef.current;
+    if (!vid) return;
+
+    const tryPlay = () => {
+      vid.muted = true;
+      vid.play().catch(() => setVideoError(true));
+    };
+
+    // Try immediately
+    tryPlay();
+
+    // Also try on any user interaction (mobile requirement)
+    const onTouch = () => { tryPlay(); };
+    document.addEventListener("touchstart", onTouch, { once: true });
+    document.addEventListener("click",      onTouch, { once: true });
+
+    return () => {
+      document.removeEventListener("touchstart", onTouch);
+      document.removeEventListener("click",      onTouch);
+    };
   }, []);
 
   const slide = slides[current];
@@ -95,21 +121,47 @@ export default function Hero() {
           <div className="frame-corner br" />
           <div className="frame-orbit" />
 
-          {/* ✅ SIRF YAHAN IMAGE LAGI HAI — baaki sab same */}
-          <video
-            src={heroVideo}
-            autoPlay
-            loop
-            muted
-            playsInline
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              objectPosition: "center top",
-              display: "block",
-            }}
-          />
+          {/* Video — mobile friendly */}
+          {!videoError ? (
+            <video
+              ref={videoRef}
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="auto"
+              onError={() => setVideoError(true)}
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                objectPosition: "center top",
+                display: "block",
+              }}
+            >
+              <source src={heroVideo} type="video/mp4" />
+            </video>
+          ) : (
+            /* Fallback if video fails */
+            <div style={{
+              width:"100%", height:"100%",
+              background:"linear-gradient(135deg,#111,#1a1a1a)",
+              display:"flex", alignItems:"center", justifyContent:"center",
+              flexDirection:"column", gap:"1rem"
+            }}>
+              <svg viewBox="0 0 80 70" fill="none" width="80" opacity="0.5">
+                <rect x="5" y="20" width="70" height="46" rx="6" stroke="#C9A84C" strokeWidth="2"/>
+                <circle cx="40" cy="43" r="14" stroke="#C9A84C" strokeWidth="2"/>
+                <circle cx="40" cy="43" r="8" stroke="#C9A84C" strokeWidth="1.5"/>
+                <circle cx="40" cy="43" r="3" fill="#C9A84C"/>
+                <rect x="26" y="10" width="18" height="12" rx="2" stroke="#C9A84C" strokeWidth="2"/>
+                <circle cx="62" cy="30" r="3" fill="#C9A84C"/>
+              </svg>
+              <p style={{color:"rgba(201,168,76,0.5)",fontSize:"0.75rem",letterSpacing:"0.1em"}}>
+                Sandeela Studio
+              </p>
+            </div>
+          )}
 
           <div className="hero-badge">
             <span className="badge-num">★ 5.0</span>

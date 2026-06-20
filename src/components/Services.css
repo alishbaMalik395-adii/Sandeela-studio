@@ -1,5 +1,5 @@
 .services {
-  padding: 8rem 5%;
+  padding: 4rem 5%;
   background: transparent;
   position: relative;
   overflow: hidden;
@@ -69,9 +69,23 @@
 }
 
 .srv-card:hover {
-  transform: translateY(-6px);
+  transform: translateY(-10px);
   z-index: 2;
   background: #0e0e0e;
+  border-color: rgba(201, 168, 76, 0.8);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 0 15px rgba(201, 168, 76, 0.15);
+  animation: srv-blink-up 1.2s infinite alternate ease-in-out;
+}
+
+@keyframes srv-blink-up {
+  0% {
+    border-color: rgba(201, 168, 76, 0.3);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 0 5px rgba(201, 168, 76, 0.05);
+  }
+  100% {
+    border-color: rgba(201, 168, 76, 1);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 0 20px rgba(201, 168, 76, 0.4);
+  }
 }
 
 .srv-featured {

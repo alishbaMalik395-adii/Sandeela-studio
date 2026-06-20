@@ -1,18 +1,29 @@
 import { useState, useEffect, useRef } from "react";
 import "./Portfolio.css";
 
+// Import portfolio videos
+import portPortrait1 from "../assets/portfolio_portrait_1.mp4";
+import portPortrait2 from "../assets/portfolio_portrait_2.mp4";
+import portWedding1 from "../assets/portfolio_wedding_1.mp4";
+import portWedding2 from "../assets/portfolio_wedding_2.mp4";
+import portCommercial1 from "../assets/portfolio_commercial_1.mp4";
+import portCommercial2 from "../assets/portfolio_commercial_2.mp4";
+import portFashion1 from "../assets/portfolio_fashion_1.mp4";
+import portFashion2 from "../assets/portfolio_fashion_2.mp4";
+import portNature1 from "../assets/portfolio_nature_1.mp4";
+
 const categories = ["All", "Portrait", "Wedding", "Commercial", "Fashion", "Nature"];
 
 const items = [
-  { id: 1, cat: "Portrait", title: "Golden Hour Portrait", desc: "Studio lighting mastery" },
-  { id: 2, cat: "Wedding", title: "Eternal Vows", desc: "A love story captured" },
-  { id: 3, cat: "Commercial", title: "Brand Identity", desc: "Visual storytelling" },
-  { id: 4, cat: "Fashion", title: "Editorial Glamour", desc: "High fashion series" },
-  { id: 5, cat: "Nature", title: "Islamabad Landscape", desc: "Natural beauty of Pakistan" },
-  { id: 6, cat: "Portrait", title: "Professional Headshot", desc: "Corporate portraits" },
-  { id: 7, cat: "Wedding", title: "Reception Moments", desc: "Joy & celebration" },
-  { id: 8, cat: "Commercial", title: "Product Showcase", desc: "Luxury product shoot" },
-  { id: 9, cat: "Fashion", title: "Street Fashion", desc: "Urban style series" },
+  { id: 1, cat: "Portrait", title: "Golden Hour Portrait", desc: "Studio lighting mastery", video: portPortrait1 },
+  { id: 2, cat: "Wedding", title: "Eternal Vows", desc: "A love story captured", video: portWedding1 },
+  { id: 3, cat: "Commercial", title: "Brand Identity", desc: "Visual storytelling", video: portCommercial1 },
+  { id: 4, cat: "Fashion", title: "Editorial Glamour", desc: "High fashion series", video: portFashion1 },
+  { id: 5, cat: "Nature", title: "Islamabad Landscape", desc: "Natural beauty of Pakistan", video: portNature1 },
+  { id: 6, cat: "Portrait", title: "Professional Headshot", desc: "Corporate portraits", video: portPortrait2 },
+  { id: 7, cat: "Wedding", title: "Reception Moments", desc: "Joy & celebration", video: portWedding2 },
+  { id: 8, cat: "Commercial", title: "Product Showcase", desc: "Luxury product shoot", video: portCommercial2 },
+  { id: 9, cat: "Fashion", title: "Street Fashion", desc: "Urban style series", video: portFashion2 },
 ];
 
 const colors = ["#1a1a1a", "#111", "#151515", "#1c1a15", "#12100a", "#181818", "#141414", "#1a180f", "#0f0f0f"];
@@ -54,15 +65,21 @@ export default function Portfolio() {
           {filtered.map((item, i) => (
             <div key={item.id} className="port-item" style={{ animationDelay: `${i * 0.08}s` }}>
               <div className="port-img" style={{ background: colors[item.id - 1] }}>
-                <div className="port-img-inner">
-                  <svg viewBox="0 0 50 45" fill="none" width="50" opacity="0.3">
-                    <rect x="2" y="12" width="46" height="30" rx="4" stroke="#C9A84C" strokeWidth="1.5" />
-                    <circle cx="25" cy="27" r="9" stroke="#C9A84C" strokeWidth="1.5" />
-                    <circle cx="25" cy="27" r="4" fill="rgba(201,168,76,0.3)" />
-                    <rect x="16" y="5" width="12" height="9" rx="1.5" stroke="#C9A84C" strokeWidth="1.5" />
-                  </svg>
-                  <span className="port-img-label">Add Photo #{item.id}</span>
-                </div>
+                <video
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  preload="auto"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    display: "block",
+                  }}
+                >
+                  <source src={item.video} type="video/mp4" />
+                </video>
                 <div className="port-overlay">
                   <div className="port-overlay-content">
                     <span className="port-cat">{item.cat}</span>

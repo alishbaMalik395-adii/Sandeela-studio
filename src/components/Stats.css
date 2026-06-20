@@ -1,24 +1,55 @@
 .stats-section {
-  background: #C9A84C;
+  background: linear-gradient(135deg, #b3923c, #d9b85c, #c9a84c, #ebd17f);
+  background-size: 300% 300%;
+  animation: stats-bg-shift 8s ease infinite alternate;
   padding: 60px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 20px 40px rgba(0,0,0,0.15), inset 0 -20px 40px rgba(0,0,0,0.15);
 }
+
+@keyframes stats-bg-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
 .stats-grid {
   max-width: 1200px; margin: 0 auto;
   display: grid; grid-template-columns: repeat(4,1fr);
   gap: 40px;
 }
-.stat-item { text-align: center; }
+
+.stat-item {
+  text-align: center;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.4s ease;
+  cursor: default;
+}
+
+.stat-item:hover {
+  transform: translateY(-8px) scale(1.06);
+  filter: drop-shadow(0 8px 16px rgba(8, 8, 8, 0.25));
+}
+
 .stat-num {
   font-family: 'Cormorant Garamond', serif;
   font-size: 56px; font-weight: 600;
   color: #080808; line-height: 1;
   display: flex; align-items: baseline; justify-content: center;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
+
 .stat-suffix { font-size: 32px; margin-left: 2px; }
+
 .stat-label {
   font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
-  color: rgba(8,8,8,0.6); margin-top: 8px;
+  color: rgba(8,8,8,0.7); margin-top: 8px;
+  font-weight: 600;
 }
+
 @media (max-width: 768px) {
   .stats-section { padding: 40px 24px; }
   .stats-grid { grid-template-columns: repeat(2,1fr); gap: 32px; }
