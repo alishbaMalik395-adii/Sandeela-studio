@@ -309,3 +309,52 @@
   animation:ep 4s ease-in-out infinite;}
 .pl-edge-t{top:0;}.pl-edge-b{bottom:0;animation-delay:2s;}
 @keyframes ep{0%,100%{opacity:.3;}50%{opacity:1;box-shadow:0 0 8px rgba(201,168,76,0.4);}}
+
+/* ── STUDIO NAME FLASH REVEAL ── */
+.pl-studio-name-flash {
+  position: absolute;
+  top: 1.6rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 200;
+  letter-spacing: 0.35em;
+  white-space: nowrap;
+}
+
+.pl-snf-in {
+  animation: snf-pop 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes snf-pop {
+  0%   { opacity: 0; transform: translateX(-50%) scale(0.7); filter: brightness(3); }
+  60%  { opacity: 1; transform: translateX(-50%) scale(1.06); filter: brightness(1.6); }
+  100% { opacity: 1; transform: translateX(-50%) scale(1);   filter: brightness(1); }
+}
+
+.pl-snf-s {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: #C9A84C;
+  text-shadow: 0 0 12px rgba(201,168,76,0.9), 0 0 30px rgba(201,168,76,0.5);
+  letter-spacing: 0.3em;
+}
+
+.pl-snf-divider {
+  font-size: 0.5rem;
+  color: rgba(201,168,76,0.7);
+}
+
+.pl-snf-studio {
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 300;
+  color: rgba(201,168,76,0.85);
+  letter-spacing: 0.55em;
+  text-shadow: 0 0 8px rgba(201,168,76,0.5);
+}

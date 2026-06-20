@@ -131,6 +131,8 @@ export default function Hero() {
               playsInline
               preload="auto"
               onError={() => setVideoError(true)}
+              webkit-playsinline="true"
+              x5-playsinline="true"
               style={{
                 width: "100%",
                 height: "100%",

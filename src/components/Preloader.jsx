@@ -38,6 +38,7 @@ export default function Preloader() {
   const [shutter,  setShutter]  = useState(false);
   const [showDiv,  setShowDiv]  = useState(false);
   const [showStudio,setShowStudio]=useState(false);
+  const [showStudioName, setShowStudioName] = useState(false);
   const [showTag,  setShowTag]  = useState(false);
   const [showProg, setShowProg] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -171,6 +172,8 @@ export default function Preloader() {
         setFlash(true);
         setTimeout(() => setFlash(false), 60);
       }, 120);
+      // Show studio name right with shutter click
+      setTimeout(() => setShowStudioName(true), 150);
     }, T_SHUTTER);
 
     // LETTERS DROP
@@ -264,6 +267,7 @@ export default function Preloader() {
             </div>}
           </div>
         </div>
+
 
         {/* Camera after LCA */}
         {phase >= 4 && (
